@@ -1,0 +1,37 @@
+commit c7b0f9b14bd3bf725a97695df324e5be2641ef3e
+Author: Brian Simpson <bsimpson63@gmail.com>
+Date:   Mon Aug 15 16:44:17 2016 -0700
+
+    memoize: Don't set module level memoizecache, just use the g attr
+
+commit 679a8c01d707e2b20571c5f71a3e3dc6ecf94818
+Author: Brian Simpson <bsimpson63@gmail.com>
+Date:   Mon Aug 15 16:30:15 2016 -0700
+
+    tests: Patch memoizecache
+
+commit eeabd7eb0d6c659b081832f7f84e4b1da4dc9853
+Author: Brian Simpson <bsimpson63@gmail.com>
+Date:   Mon Aug 15 13:59:22 2016 -0700
+
+    memoize: Dual write to new mcrouter pool
+    
+    Reads are served from the old key and pool. Writes go to both the
+    old key/old pool and the new key/new pool.
+
+commit 21fced6bfb0c28b6ae734c6da4492676626714d4
+Author: Brian Simpson <bsimpson63@gmail.com>
+Date:   Mon Aug 15 11:18:11 2016 -0700
+
+    popular_searches: Use stalecache for memoized results
+
+commit 6552628af46b74ed12494a3c5617c5dde9af21df
+Author: Brian Simpson <bsimpson63@gmail.com>
+Date:   Mon Aug 15 11:12:40 2016 -0700
+
+    RegistrationInfo: Use stalecache for memoized html chunk
+    
+    The note on the registration page is stored in the wiki and is fronted
+    by memoizecache because it is loaded very frequently (it's on the login
+    page). Stale the cache lookup to reduce the number of requests that
+    fall through to memoizecache. It's currently requested ~1600/s.
